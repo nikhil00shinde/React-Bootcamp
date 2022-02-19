@@ -8,10 +8,22 @@
 <!-- cd imdb -->
 <!-- npm start -->
 
-# Todo
+# Day-1
 
 <!-- Main Page -->
-<!-- navbar -->
-<!-- banner -->
-<!-- Trending Movies -->
-<!-- Pagination -->
+<!-- navbar --> ✅
+<!-- banner --> ✅
+<!-- Trending Movies --> ✅
+<!-- Pagination UI --> ✅
+<!-- Responsive --> ✅
+<!-- Routing --> ✅
+
+# Day-2
+
+<!-- Tmdb Api -->
+<!-- Dynamic -->
+<!-- pagination -->
+<!-- searching,sorting,filtering -->
+<!-- emojis, -->
+<!-- favourites -->
+<!-- Host -> netlify -->

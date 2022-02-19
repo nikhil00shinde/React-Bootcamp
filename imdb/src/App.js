@@ -1,13 +1,24 @@
 import "./App.css";
-import NavBar from "./components/NavBar";
-import Banner from "./components/Banner";
-
+import { NavBar, Banner, Movies, Pagination, Favourites } from "./components";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {
 	return (
-		<>
+		<BrowserRouter>
 			<NavBar />
-			<Banner />
-		</>
+			<Routes>
+				<Route
+					path="/"
+					element={
+						<>
+							<Banner />
+							<Movies />
+							<Pagination />
+						</>
+					}
+				></Route>
+				<Route path="/favourites" element={<Favourites />} />
+			</Routes>
+		</BrowserRouter>
 	);
 }
 
