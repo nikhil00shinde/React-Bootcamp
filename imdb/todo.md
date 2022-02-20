@@ -8,7 +8,7 @@
 <!-- cd imdb -->
 <!-- npm start -->
 
-# Day-1
+# Day-1 (Setup and Static Ui)
 
 <!-- Main Page -->
 <!-- navbar --> ✅
@@ -18,7 +18,15 @@
 <!-- Responsive --> ✅
 <!-- Routing --> ✅
 
-# Day-2
+# Day-2 (Dynamic Ui)
+
+- <!-- Pagination -->
+- <!-- Tmdb -->
+  - <!-- Api request axios  -->
+  - <!-- loader -->
+  - <!-- loader remove content show -->
+- <!-- React component communication  -->
+- <!-- Emoji  -->
 
 <!-- Tmdb Api -->
 <!-- Dynamic -->

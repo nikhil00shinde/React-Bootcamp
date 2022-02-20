@@ -1,5 +1,5 @@
 import "./App.css";
-import { NavBar, Banner, Movies, Pagination, Favourites } from "./components";
+import { NavBar, Banner, Movies, Favourites } from "./components";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {
 	return (
@@ -12,7 +12,6 @@ function App() {
 						<>
 							<Banner />
 							<Movies />
-							<Pagination />
 						</>
 					}
 				></Route>
