@@ -20,6 +20,13 @@ function Movies() {
 	const add = (movie) => {
 		const newArr = [...favourites, movie];
 		setFavourites([...newArr]);
+		localStorage.setItem("imdb", JSON.stringify(newArr));
+	};
+
+	const del = (movie) => {
+		let newArr = favourites.filter((m) => m.id !== movie.id);
+		setFavourites([...newArr]);
+		localStorage.setItem("imdb", JSON.stringify(newArr));
 	};
 
 	useEffect(() => {
@@ -27,6 +34,9 @@ function Movies() {
 
 		axios.get(url).then((res) => {
 			setMovie(res.data.results);
+			let oldArr = localStorage.getItem("imdb");
+			oldArr = JSON.parse(oldArr);
+			setFavourites([...oldArr]);
 		});
 	}, [page]);
 
@@ -56,7 +66,7 @@ function Movies() {
 							>
 								{hover === movie.id &&
 									(favourites.find((m) => m.id === movie.id) ? (
-										<div className="p-2 bg-gray-800 rounded-xl text-xl absolute top-2 right-2 cursor-pointer ">
+										<div className="p-2 bg-gray-800 rounded-xl text-xl absolute top-2 right-2 cursor-pointer " onClick={()=> del(movie)}>
 											❌
 										</div>
 									) : (
