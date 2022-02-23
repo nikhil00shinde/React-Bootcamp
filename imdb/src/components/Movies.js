@@ -30,12 +30,13 @@ function Movies() {
 	};
 
 	useEffect(() => {
+		//data manga
 		const url = `https://api.themoviedb.org/3/trending/movie/week?api_key=${process.env.REACT_APP_API_KEY}&page=${page}`;
-
 		axios.get(url).then((res) => {
 			setMovie(res.data.results);
+			// everytime when page reload
 			let oldArr = localStorage.getItem("imdb");
-			oldArr = JSON.parse(oldArr);
+			oldArr = JSON.parse(oldArr) || [];
 			setFavourites([...oldArr]);
 		});
 	}, [page]);
@@ -66,7 +67,10 @@ function Movies() {
 							>
 								{hover === movie.id &&
 									(favourites.find((m) => m.id === movie.id) ? (
-										<div className="p-2 bg-gray-800 rounded-xl text-xl absolute top-2 right-2 cursor-pointer " onClick={()=> del(movie)}>
+										<div
+											className="p-2 bg-gray-800 rounded-xl text-xl absolute top-2 right-2 cursor-pointer "
+											onClick={() => del(movie)}
+										>
 											❌
 										</div>
 									) : (
