@@ -2,6 +2,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	flex-direction: column;
 	margin-top: 8rem;
 	text-align: center;
 }
@@ -10,5 +11,21 @@
 	padding: 1rem;
 	width: 25rem;
 	height: 25rem;
-	border: 1px solid;
+	border: 1px solid #ccc;
+}
+
+.bottom-card {
+	margin-top: 1rem;
+	padding: 1rem;
+	width: 25rem;
+	border: 1px solid #ccc;
+}
+
+@media only screen and (max-width: 500px) {
+	.signup-card {
+		width: 100%;
+	}
+	.bottom-card {
+		width: 100%;
+	}
 }
