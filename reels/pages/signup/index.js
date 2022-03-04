@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 // Next inbuilt Image
 import Image from "next/image";
 import insta from "../../assests/insta.jpg";
+import Link from "next/link";
 
 function index() {
 	return (
@@ -54,7 +55,10 @@ function index() {
 				</Button>
 			</div>
 			<div className="bottom-card">
-				Already Have an Account? <span style={{ color: "blue" }}>Login</span>
+				Already Have an Account?{" "}
+				<Link href="/login">
+					<span style={{ color: "blue" }}>Login</span>
+				</Link>
 			</div>
 		</div>
 	);

@@ -3,7 +3,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 // Next inbuilt Image
 import Image from "next/image";
-import insta from "../../assests/insta.jpg";
+import insta from "../assests/insta.jpg";
 // requires a loader
 import { Carousel } from "react-responsive-carousel";
 
@@ -13,7 +13,6 @@ import bg3 from "../../assests/bg3.jpg";
 import bg4 from "../../assests/bg4.jpg";
 import { AuthContext } from "../../context/auth";
 import { useRouter } from "next/router";
-import Link from "next/link";
 
 function index() {
 	const router = useRouter();
@@ -23,12 +22,13 @@ function index() {
 	const [error, setError] = React.useState("");
 	const [loading, setLoading] = React.useState(false);
 
+	const { forgetPassword } = useContext(AuthContext);
 	const handleClick = async () => {
 		try {
 			setLoading(true);
 			setError("");
-			await login(email, password);
-			console.log("🚀 ~ file: index.js ~ line 29 ~ handleClick ~ Logged In");
+			await forgetPassword(email);
+			router.push("/login");
 		} catch (err) {
 			setError(err.message);
 			setTimeout(() => {
@@ -76,17 +76,7 @@ function index() {
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
 					/>
-					<TextField
-						size="small"
-						margin="dense"
-						id="outlined-basic"
-						fullWidth
-						label="Password"
-						type="password"
-						variant="outlined"
-						value={password}
-						onChange={(e) => setPassword(e.target.value)}
-					/>
+
 					{error !== "" && <div style={{ color: "red" }}>{error}</div>}
 					<Button
 						fullWidth
@@ -95,17 +85,11 @@ function index() {
 						style={{ marginTop: "1rem" }}
 						onClick={handleClick}
 					>
-						Login
+						Send Email
 					</Button>
-					<div style={{ color: "blue", marginTop: "0.5rem" }}>
-						Forget Password ?{" "}
-					</div>
 				</div>
 				<div className="bottom-card">
-					Dont't Have an Account?{" "}
-					<Link href="/signup">
-						<span style={{ color: "blue" }}>Sign Up</span>
-					</Link>
+					Dont't Have an Account? <span style={{ color: "blue" }}>Sign Up</span>
 				</div>
 			</div>
 		</div>
