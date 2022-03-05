@@ -3,7 +3,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 // Next inbuilt Image
 import Image from "next/image";
-import insta from "../assests/insta.jpg";
+import insta from "../../assests/insta.jpg";
 // requires a loader
 import { Carousel } from "react-responsive-carousel";
 
@@ -13,6 +13,7 @@ import bg3 from "../../assests/bg3.jpg";
 import bg4 from "../../assests/bg4.jpg";
 import { AuthContext } from "../../context/auth";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 function index() {
 	const router = useRouter();
@@ -89,7 +90,10 @@ function index() {
 					</Button>
 				</div>
 				<div className="bottom-card">
-					Dont't Have an Account? <span style={{ color: "blue" }}>Sign Up</span>
+					Dont't Have an Account?{" "}
+					<Link href="/signup">
+						<span style={{ color: "blue" }}>Sign Up</span>
+					</Link>
 				</div>
 			</div>
 		</div>

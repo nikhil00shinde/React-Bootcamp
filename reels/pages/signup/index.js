@@ -5,8 +5,63 @@ import Button from "@mui/material/Button";
 import Image from "next/image";
 import insta from "../../assests/insta.jpg";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { AuthContext } from "../../context/auth";
+import { useContext } from "react";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { storage } from "../../firebase";
 
 function index() {
+	const router = useRouter();
+	const { signup, user } = useContext(AuthContext);
+	const [email, setEmail] = React.useState("");
+	const [password, setPassword] = React.useState("");
+	const [name, setName] = React.useState("");
+	const [file, setFile] = React.useState(null);
+	const [error, setError] = React.useState("");
+	const [loading, setLoading] = React.useState(false);
+
+	const handleClick = async () => {
+		try {
+			setLoading(true);
+
+			setError("");
+
+			const user = await signup(email, password);
+
+			const storageRef = ref(storage, `${user.uid}/Profile`);
+
+			const uploadTask = uploadBytesResumable(storageRef, file);
+
+			uploadTask.on(
+				"state_changed",
+				(snapshot) => {
+					const progress =
+						(snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+					console.log("Upload is " + progress + "% done");
+				},
+				(error) => {
+					console.log(error);
+				},
+				() => {
+					getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+						console.log("File available at", downloadURL);
+					});
+				}
+			);
+		} catch (err) {
+			setError(err.message);
+			setTimeout(() => {
+				setError("");
+			}, 2000);
+		}
+
+		setLoading(false);
+	};
+
+	React.useEffect(() => {
+		if (user) router.push("/");
+	}, [user]);
 	return (
 		<div className="signup-container">
 			<div className="signup-card">
@@ -18,6 +73,8 @@ function index() {
 					fullWidth
 					label="Email"
 					variant="outlined"
+					value={email}
+					onChange={(e) => setEmail(e.target.value)}
 				/>
 				<TextField
 					size="small"
@@ -27,6 +84,8 @@ function index() {
 					label="Password"
 					type="password"
 					variant="outlined"
+					value={password}
+					onChange={(e) => setPassword(e.target.value)}
 				/>
 				<TextField
 					size="small"
@@ -35,6 +94,8 @@ function index() {
 					fullWidth
 					label="Full Name"
 					variant="outlined"
+					value={name}
+					onChange={(e) => setName(e.target.value)}
 				/>
 				<Button
 					fullWidth
@@ -42,7 +103,12 @@ function index() {
 					component="label"
 					style={{ marginTop: "1rem" }}
 				>
-					<input type="file" accept="image/*" style={{ display: "none" }} />
+					<input
+						type="file"
+						accept="image/*"
+						style={{ display: "none" }}
+						onChange={(e) => setFile(e.target.files[0])}
+					/>
 					Upload
 				</Button>
 				<Button
@@ -50,6 +116,8 @@ function index() {
 					variant="contained"
 					component="span"
 					style={{ marginTop: "1rem" }}
+					onClick={handleClick}
+					disabled={loading}
 				>
 					Sign Up
 				</Button>

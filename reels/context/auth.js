@@ -5,6 +5,7 @@ import {
 	onAuthStateChanged,
 	signOut,
 	sendPasswordResetEmail,
+	createUserWithEmailAndPassword,
 } from "firebase/auth";
 
 export const AuthContext = React.createContext();
@@ -25,6 +26,10 @@ function AuthWrapper({ children }) {
 		return sendPasswordResetEmail(auth, email);
 	}
 
+	function signup(email, password) {
+		return createUserWithEmailAndPassword(auth, email, password);
+	}
+
 	React.useEffect(() => {
 		onAuthStateChanged(auth, (user) => {
 			if (user) {
@@ -39,6 +44,7 @@ function AuthWrapper({ children }) {
 		user,
 		logout,
 		forgetPassword,
+		signup,
 	};
 	return (
 		<AuthContext.Provider value={store}>

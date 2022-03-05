@@ -17,7 +17,9 @@ import Link from "next/link";
 
 function index() {
 	const router = useRouter();
+
 	const { login, user } = useContext(AuthContext);
+
 	const [email, setEmail] = React.useState("");
 	const [password, setPassword] = React.useState("");
 	const [error, setError] = React.useState("");
@@ -97,9 +99,11 @@ function index() {
 					>
 						Login
 					</Button>
-					<div style={{ color: "blue", marginTop: "0.5rem" }}>
-						Forget Password ?{" "}
-					</div>
+					<Link href="/forgetpassword">
+						<div style={{ color: "blue", marginTop: "0.5rem" }}>
+							Forget Password ?{" "}
+						</div>
+					</Link>
 				</div>
 				<div className="bottom-card">
 					Dont't Have an Account?{" "}
