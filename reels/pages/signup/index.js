@@ -10,6 +10,8 @@ import { AuthContext } from "../../context/auth";
 import { useContext } from "react";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage } from "../../firebase";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../../firebase";
 
 function index() {
 	const router = useRouter();
@@ -26,10 +28,12 @@ function index() {
 			setLoading(true);
 
 			setError("");
-
+			// auth -> unique id
 			const user = await signup(email, password);
+			console.log("🚀 ~ file: index.js ~ line 31 ~ handleClick ~ user", user);
 
-			const storageRef = ref(storage, `${user.uid}/Profile`);
+			// storage
+			const storageRef = ref(storage, `${user.user.uid}/Profile`);
 
 			const uploadTask = uploadBytesResumable(storageRef, file);
 
@@ -44,8 +48,17 @@ function index() {
 					console.log(error);
 				},
 				() => {
-					getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+					getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
 						console.log("File available at", downloadURL);
+						let obj = {
+							name: name,
+							email: email,
+							uid: user.user.uid,
+							photoURL: downloadURL,
+						};
+						// firestore
+						await setDoc(doc(db, "users", user.user.uid), obj);
+						console.log("comple");
 					});
 				}
 			);
