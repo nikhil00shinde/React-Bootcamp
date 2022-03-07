@@ -9,9 +9,9 @@ import { useRouter } from "next/router";
 import { AuthContext } from "../../context/auth";
 import { useContext } from "react";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { storage } from "../../firebase";
+import { storage } from "../../firebase1";
 import { doc, setDoc } from "firebase/firestore";
-import { db } from "../../firebase";
+import { db } from "../../firebase1";
 
 function Index() {
 	const router = useRouter();
