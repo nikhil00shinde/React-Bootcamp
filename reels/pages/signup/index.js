@@ -13,7 +13,7 @@ import { storage } from "../../firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 
-function index() {
+function Index() {
 	const router = useRouter();
 	const { signup, user } = useContext(AuthContext);
 	const [email, setEmail] = React.useState("");
@@ -145,4 +145,5 @@ function index() {
 	);
 }
 
-export default index;
+export default Index;
+// ye jo Index naam ki cheej hain ye function nhi functional component hain

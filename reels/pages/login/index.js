@@ -15,7 +15,8 @@ import { AuthContext } from "../../context/auth";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-function index() {
+// i should be upper case
+function Index() {
 	const router = useRouter();
 
 	const { login, user } = useContext(AuthContext);
@@ -106,7 +107,7 @@ function index() {
 					</Link>
 				</div>
 				<div className="bottom-card">
-					Dont't Have an Account?{" "}
+					Dont&apos;t Have an Account?{" "}
 					<Link href="/signup">
 						<span style={{ color: "blue" }}>Sign Up</span>
 					</Link>
@@ -116,4 +117,4 @@ function index() {
 	);
 }
 
-export default index;
+export default Index;
