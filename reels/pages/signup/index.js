@@ -55,6 +55,7 @@ function Index() {
 							email: email,
 							uid: user.user.uid,
 							photoURL: downloadURL,
+							posts: [],
 						};
 						// firestore
 						await setDoc(doc(db, "users", user.user.uid), obj);

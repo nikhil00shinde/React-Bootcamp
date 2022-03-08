@@ -17,11 +17,12 @@ import HomeIcon from "@mui/icons-material/Home";
 import ExploreIcon from "@mui/icons-material/Explore";
 import { AuthContext } from "../context/auth";
 import { Router, useRouter } from "next/router";
+import Link from "next/link";
 
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Logout"];
 
-const ResponsiveAppBar = () => {
+const ResponsiveAppBar = ({ userData }) => {
 	const { logout } = React.useContext(AuthContext);
 	const router = useRouter();
 
@@ -75,7 +76,7 @@ const ResponsiveAppBar = () => {
 							<IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
 								<Avatar
 									alt="Remy Sharp"
-									src="/static/images/avatar/2.jpg"
+									src={userData?.photoURL}
 									sx={{ margin: "0.5rem" }}
 								/>
 							</IconButton>
@@ -97,7 +98,9 @@ const ResponsiveAppBar = () => {
 							onClose={handleCloseUserMenu}
 						>
 							<MenuItem onClick={handleCloseUserMenu}>
-								<Typography textAlign="center">Profile</Typography>
+								<Link href="/profile">
+									<Typography textAlign="center">Profile</Typography>
+								</Link>
 							</MenuItem>
 							<MenuItem
 								onClick={() => {
